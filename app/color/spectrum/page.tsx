@@ -24,7 +24,14 @@ export default function Page({
   return (
     <div>
       <header className="my-4">
-        <h1 className="text-xl font-bold">색상 스펙트럼 관찰</h1>
+        <h1 className="text-xl font-bold">색상 스펙트럼 추출</h1>
+        <h2 className="text-gray-600">
+          선택한 색상의 반사 스펙트럼을 추출합니다.
+        </h2>
+        <h2 className="text-gray-600 text-sm">
+          아래 그래프는 400nm ~ 700nm 파장의 가시광선 영역에서 빛에 대한
+          반사율을 0 ~ 1(100%) 스케일로 나타냅니다.
+        </h2>
       </header>
       <main>
         <section className="flex gap-4 justify-between">
@@ -47,7 +54,7 @@ export default function Page({
           <SpectrumGraph spectrum={data.spectrum} color={hex} />
         </section>
         <section className="py-4">
-          <h2 className="font-semibold">더 많은 색상의 스펙트럼 관찰</h2>
+          <h2 className="font-semibold">더 많은 색상의 반사 스펙트럼 관찰</h2>
           <div className="flex gap-2 flex-wrap h-[500px] overflow-y-auto border p-4 rounded mt-2">
             {SPECTRUM_DATA.map((spec, index) => (
               <div
