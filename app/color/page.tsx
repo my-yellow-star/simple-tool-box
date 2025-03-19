@@ -60,7 +60,7 @@ export default function Page() {
       <p>{realMixed}</p>
       <p>{rgbToSpectrum(hexToRgb("#ffe8e4")).join(", ")}</p>
       <p>
-        {rgbToHex(spectrumToRgb(Array.from({ length: 31 }).map((e) => 0.81)))}
+        {rgbToHex(spectrumToRgb(Array.from({ length: 31 }).map(() => 0.81)))}
       </p>
     </div>
   );
