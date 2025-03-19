@@ -1,4 +1,5 @@
-import { RGB } from "./color-space";
+import { RGB, rgbToXyz } from "./color-space";
+import { spectrumToRgb, xyzToSpectrum } from "./spectrum";
 
 export interface Paint<T> {
   color: T;
@@ -44,7 +45,7 @@ function kubelkaMunkToReflectance(kOverS: number[]): number[] {
 }
 
 // 색상 혼합 함수 (Kubelka-Munk 기반)
-export function kubelkaMunkMix(
+function kubelkaMunkMix(
   paints: Paint<number[]>[],
   wavelengthCount: number
 ): number[] {
@@ -65,4 +66,15 @@ export function kubelkaMunkMix(
 
   // 혼합된 K/S 값으로부터 반사율 계산
   return kubelkaMunkToReflectance(mixedKOverS);
+}
+
+export function realisticMix(...paints: Paint<RGB>[]): RGB {
+  const reflectance = kubelkaMunkMix(
+    paints.map((p) => ({
+      color: xyzToSpectrum(rgbToXyz(p.color)),
+      ratio: p.ratio,
+    })),
+    31
+  );
+  return spectrumToRgb(reflectance);
 }

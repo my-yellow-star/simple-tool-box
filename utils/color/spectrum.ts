@@ -1,3 +1,4 @@
+import { calculate } from "../machine-learning/color-spectrum-cnn-v5";
 import { CIE_MATCH_X, CIE_MATCH_Y, CIE_MATCH_Z } from "./cie";
 import { XYZ, xyzToRgb, RGB, rgbToXyz } from "./color-space";
 
@@ -40,16 +41,7 @@ export function spectrumToXyz(spectrum: number[]): {
 }
 
 export function xyzToSpectrum(xyz: XYZ): number[] {
-  const spectrum: number[] = [];
-  const wavelengths = CIE_MATCH_X.length; // 파장 범위 (10nm 간격)
-
-  for (let i = 0; i < wavelengths; i++) {
-    // TODO xyz 를 스펙트럼으로 변환하는 수학적 모델링 연구
-  }
-
-  // 스펙트럼 정규화 (0~1 범위로 스케일링)
-  const maxReflectance = Math.max(...spectrum);
-  return spectrum.map((value) => Math.max(0, value) / maxReflectance);
+  return calculate(xyz);
 }
 
 export function spectrumToRgb(spectrum: number[]): {
