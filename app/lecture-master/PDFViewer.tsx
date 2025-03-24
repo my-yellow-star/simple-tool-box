@@ -59,29 +59,18 @@ export default function PDFViewer({
         <Document
           file={pdfUrl}
           onLoadSuccess={onDocumentLoadSuccess}
-          className="flex justify-center"
+          className="flex flex-col items-center"
           loading={
             <div className="flex justify-center items-center h-full">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
             </div>
           }
         >
-          <Page
-            pageNumber={currentPage}
-            width={800}
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
-          />
-        </Document>
-      </div>
-      {extractedText && Object.keys(extractedText).length > 0 && (
-        <div className="w-96 shrink-0 border rounded-lg p-4">
-          <h2 className="text-xl font-bold mb-4">추출된 텍스트</h2>
-          <div className="mb-4">
+          <div className="mb-4 flex items-center gap-2">
             <button
               onClick={() => onPageChange(currentPage - 1)}
               disabled={currentPage <= 1 || isLoading}
-              className="mr-2 px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+              className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
             >
               이전
             </button>
@@ -106,12 +95,23 @@ export default function PDFViewer({
             <button
               onClick={() => onPageChange(currentPage + 1)}
               disabled={currentPage >= totalPages || isLoading}
-              className="ml-2 px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+              className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
             >
               다음
             </button>
           </div>
-          <div className="whitespace-pre-wrap bg-gray-50 p-4 rounded-lg overflow-y-auto h-[calc(100vh-16rem)]">
+          <Page
+            pageNumber={currentPage}
+            width={800}
+            renderTextLayer={true}
+            renderAnnotationLayer={true}
+          />
+        </Document>
+      </div>
+      {extractedText && Object.keys(extractedText).length > 0 && (
+        <div className="w-96 shrink-0 border rounded-lg p-4">
+          <h2 className="text-xl font-bold mb-4">추출된 텍스트</h2>
+          <div className="whitespace-pre-wrap bg-gray-50 p-4 rounded-lg overflow-y-auto h-[calc(100vh-12rem)]">
             {isLoading ? (
               <div className="space-y-3">
                 <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
