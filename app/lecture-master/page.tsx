@@ -120,7 +120,7 @@ export default function LectureMaster() {
       <div className="fixed left-0 right-0 top-0 bottom-0 bg-white z-10">
         <div className="container mx-auto p-4 h-full flex flex-col">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-bold">강의 자료 텍스트 추출기</h1>
+            <h1 className="text-2xl font-bold">강의 자료 도우미</h1>
             <div className="flex items-center gap-4">
               <div className="w-64">
                 <input
@@ -164,6 +164,7 @@ export default function LectureMaster() {
                 }}
                 onPageChange={handlePageChange}
                 isLoading={isLoading}
+                fileName={pdfFile?.name || ""}
               />
             </Suspense>
           )}
